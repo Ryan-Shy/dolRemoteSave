@@ -9,11 +9,8 @@
     },
     "keywords": [],
     "author": "",
-    "license": "ISC",
+    "license": "MIT",
     "description": "",
-    "devDependencies": {
-        "tsc": "^2.0.4"
-    },
     "dependencies": {
         "typescript": "^5.7.2"
     }
