@@ -46,6 +46,9 @@ function OnCloseOverlay() {
     } else {
         greyout.setAttribute('class', 'ryanshy-greyout-disabled');
     }
+
+    // clear table
+    clearTable();
 }
 /*
  * Overlay tabs
