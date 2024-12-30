@@ -1,0 +1,24 @@
+.saveMenuButton {
+    color: #eee;
+    background-color: #4372ff;
+    border: 1px solid #57c;
+    line-height: normal;
+    padding: 0.6em;
+    transition-duration: 200ms;
+    user-select: none;
+    cursor: pointer;
+    -webkit-appearance: button;
+    appearance: button;
+    overflow: visible;
+}
+
+.saveMenuButton:hover {
+    background-color: #4372ff;
+    border-color: #79e;
+}
+
+.saveMenuButton:disabled {
+    border: 1px solid #666;
+    background-color: #444;
+    cursor: not-allowed !important;
+}
