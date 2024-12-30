@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="dol-styles.css">
+        <script src="/ryanshy/ryanshyGlobal.js"></script>
+        <script src="/ryanshy/ryanshyRemoteStorage.js"></script>
+        <script src="/ryanshy/ryanshyTypes.js"></script>
+        <script src="/ryanshy/ryanshyButtons.js"></script>
+        <script src="/ryanshy/ryanshyLocalStorage.js"></script>
+        <script src="/ryanshy/savetable.js"></script>
+        <script src="/ryanshy/dolHelper.js"></script>
+    </head>
+    <body>
+        <script src="/ryanshy/index.js" async defer></script>
+        <div id="ryanshy-save-overlay" class="ryanshy-save-overlay-disabled">
+            <div id="ryanshy-save-overlay-exit-button" class="ryanshy-exit-button" onclick="OnCloseOverlay()"></div>
+            <div id="ryanshy-overlay-tab-login" class="ryanshy-overlay-tab" onclick="OnLoginTabClicked()"> Login </div>
+            <div id="ryanshy-overlay-tab-saves" class="ryanshy-overlay-tab" onclick="OnSavesTabClicked()" current> Saves </div>
+            <div id="ryanshy-overlay-tab-settings" class="ryanshy-overlay-tab" onclick="OnSettingsTabClicked()"> Settings </div>
+
+            <div class="ryanshy-custom-overlay-placeholder"></div>
+
+            <div class="ryanshy-panels">
+                <div id="ryanshy-login-panel" class="ryanshy-panel-disabled">
+                    <div class="ryanshy-custom-overlay" style="visibility: hidden; position: absolute; overflow: hidden;">
+                        todo: in this tab, the user will enter their username and password, content should be saved on device!
+                    </div>
+                    <div class="ryanshy-custom-overlay">
+                        <div class="ryanshy-login-element">
+                            <h2>Login</h2>
+                            <form id="ryanshy-login-form">
+                                <p class="ryanshy-input-name">Server:</p>
+                                <input id="ryanshy-server" type="text" name="Server" placeholder="https://ryanshy.eu:8089" value="https://ryanshy.eu:8089" required>
+                                <br>
+                                <p class="ryanshy-input-name">Username:</p>
+                                <input id="ryanshy-username" type="text" name="Username" placeholder="username" required>
+                                <br>
+                                <p class="ryanshy-input-name">Password:</p>
+                                <input id="ryanshy-password" type="password" name="Password" placeholder="password" required>
+                                <br>
+                                <button type="submit">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div id="ryanshy-saves-panel" class="ryanshy-panel-enabled">
+                    <div class="ryanshy-custom-overlay" style="visibility: hidden; position: absolute; overflow: hidden;">
+                        todo: this tab will list all remote saves and offer load, overwrite, delete and new save functionality
+                    </div>
+                    <div id="ryanshy-saves-element-head" class="ryanshy-custom-overlay">
+                        <h2>Saves</h2>
+                    </div>
+                    <div class="ryanshy-custom-overlay">
+                        <div id="ryanshy-saves-element" class="ryanshy-saves-element">
+                            <table class="ryanshy-saves-table">
+                                <thead>
+                                    <tr class="ryanshy-saves-table-head">
+                                        <th class="ryanshy-number-col">#</th>
+                                        <th class="ryanshy-save-load-col">Save/Load</th>
+                                        <th class="ryanshy-id-name-col">ID/Name</th>
+                                        <th class="ryanshy-date-col">Date</th>
+                                        <th class="ryanshy-delete-col">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ryanshy-saves-table-body">
+                                    <tr class="ryanshy-saves-table-row">
+                                        <td class="ryanshy-number-col">1</td>
+                                        <td class="ryanshy-save-load-col">
+                                            <button class="saveMenuButton" disabled>Save</button><button class="saveMenuButton">Load</button>
+                                        </td>
+                                        <td class="ryanshy-id-name-col">Fluttersv5</td>
+                                        <td class="ryanshy-date-col">2024-12-29 12:14:19</td>
+                                        <td class="ryanshy-delete-col">
+                                            <button class="saveMenuButton">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="ryanshy-saves-table-row">
+                                        <td class="ryanshy-number-col">2</td>
+                                        <td class="ryanshy-save-load-col">
+                                            <button class="saveMenuButton" disabled>Save</button><button class="saveMenuButton">Load</button>
+                                        </td>
+                                        <td class="ryanshy-id-name-col">Fluttersv5</td>
+                                        <td class="ryanshy-date-col">2024-12-29 13:18:21</td>
+                                        <td class="ryanshy-delete-col">
+                                            <button class="saveMenuButton">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="ryanshy-settings-panel" class="ryanshy-panel-disabled">
+                    <div class="ryanshy-custom-overlay" style="visibility: hidden; position: absolute; overflow: hidden;">
+                        todo: this tab needs to have the change password function and in the future will hold autosave settings
+                    </div>
+                    <div class="ryanshy-custom-overlay">
+                        <div class="ryanshy-settings-element">
+                            <h2>Settings</h2>
+                            I currently haven't implemented any Settings XD
+                        </div>
+                    </div>
+                    <div class="ryanshy-custom-overlay">
+                        <div class="ryanshy-change-password-element">
+                            <h2>Change Password</h2>
+                            <form id="ryanshy-change-password-form">
+                                <p class="ryanshy-input-name">New Password:</p>
+                                <input id="ryanshy-new-password" type="password" name="New Password" placeholder="password" required>
+                                <br>
+                                <button type="submit">Change Password</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="ryanshy-greyout" class="ryanshy-greyout-disabled"></div>
+
+        <div id="ryanshy-toast" class=""></div>
+
+        <iframe id="dolEmbedded" class="ryanshy-iframe" type="text/html" src="Degrees of Lewdity 0.5.2.8.html">
+        </iframe>
+    </body>
+</html>
