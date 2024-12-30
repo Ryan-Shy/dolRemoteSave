@@ -1,0 +1,6 @@
+
+/**/.vscode
+/ryanshy
+/**/node_modules
+/**/__pycache__
+/**/*.db
