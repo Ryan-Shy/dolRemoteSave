@@ -65,7 +65,11 @@ dolRemoteSave.html.ryanshy_save_overlay = `
                 <div class="ryanshy-custom-overlay">
                     <div class="ryanshy-settings-element">
                         <h2>Settings</h2>
-                        I currently haven't implemented any Settings XD
+                        <div class="ryanshy-menu-button-position">
+                            <span style="overflow: hidden;">Menu Button:</span>
+                            <label> <input id="ryanshy-settings-menu-button-top" type="radio" name="menuButtonPosition" value="beforebegin"> Top </label>
+                            <label> <input id="ryanshy-settings-menu-button-bottom" type="radio" name="menuButtonPosition" value="afterend"> Bottom </label>
+                        </div>
                     </div>
                 </div>
                 <div class="ryanshy-custom-overlay">

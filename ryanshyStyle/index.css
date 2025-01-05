@@ -207,6 +207,10 @@
     height: fit-content;
     width: 100%;
 }
+
+.ryanshy-menu-button-position {
+    overflow: hidden;
+}
 /*
  * saves panel elements
  */

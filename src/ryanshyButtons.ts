@@ -43,6 +43,12 @@ dolRemoteSave.buttons.OnCloseOverlay = function () {
         overlay.setAttribute('class', 'ryanshy-save-overlay-disabled');
     }
 
+    // disable all panels
+    const panels = document.getElementsByClassName("ryanshy-panel-enabled");
+    for (const panel of panels) {
+        panel.setAttribute("class", "ryanshy-panel-disabled");
+    }
+
     // remove greyout
     const greyout = document.getElementById("ryanshy-greyout");
     if (!greyout) {
@@ -164,4 +170,16 @@ dolRemoteSave.buttons.OnChangePasswordSubmit = async function (event: SubmitEven
     await dolRemoteSave.remoteStorage.remoteChangePWD(password, remoteStorageInfo, ()=> {
         (passwordElement as HTMLInputElement).value = "";
     });
+}
+/*
+ * Settings Menu
+ */
+dolRemoteSave.buttons.OnMenuPositionUpdated = function (event: Event) {
+    const target = event.target as any;
+
+    if (dolRemoteSave.settings?.menuButton?.setMenuButtonPosition) {
+        const position: InsertPosition = target.value;
+        console.log("changing menu button position to", position)
+        dolRemoteSave.settings.menuButton.setMenuButtonPosition(position);
+    }
 }

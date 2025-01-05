@@ -21,14 +21,18 @@ dolRemoteSave.AddSaveDiv = function () {
     if (!customOverlayContent) {
         return;
     }
-    //alert("switch to save menu");
+    let menuButtonPosition : InsertPosition = "afterend";
+    if (dolRemoteSave.settings?.menuButton?.getMenuButtonPosition) {
+        menuButtonPosition = dolRemoteSave.settings.menuButton.getMenuButtonPosition();
+    }
+
     console.log("loading save overlay addon.")
     const newDiv = cw.document.createElement("div")
     newDiv.innerText = "RyanShy Save Menu: ";
     newDiv.setAttribute("id", "ryanshy-save-menu");
     newDiv.style.paddingTop = "6px";
     newDiv.style.paddingLeft = "6px";
-    saveList.insertAdjacentElement("afterend", newDiv);
+    saveList.insertAdjacentElement(menuButtonPosition, newDiv);
 
     const menuButton = cw.document.createElement("button");
     menuButton.className = "saveMenuButton";
@@ -59,6 +63,16 @@ dolRemoteSave.OnLoad = function() {
     // attach login screen handler
     document.getElementById("ryanshy-login-form")?.addEventListener('submit', dolRemoteSave.buttons?.OnLoginSubmit ?? ((event)=>{event.preventDefault();}));
     document.getElementById("ryanshy-change-password-form")?.addEventListener('submit', dolRemoteSave.buttons?.OnChangePasswordSubmit ?? ((event)=>{event.preventDefault();}));
+    document.querySelectorAll('input[name="menuButtonPosition"]').forEach(radio => {
+        radio.addEventListener("change", dolRemoteSave.buttons?.OnMenuPositionUpdated ?? (()=>{}));
+    });
+    if (dolRemoteSave.settings?.menuButton?.getMenuButtonPosition) {
+        if (dolRemoteSave.settings.menuButton.getMenuButtonPosition() === "beforebegin") {
+            document.getElementById("ryanshy-settings-menu-button-top")?.setAttribute("checked", "");
+        } else {
+            document.getElementById("ryanshy-settings-menu-button-bottom")?.setAttribute("checked", "");
+        }
+    }
 
     if (dolRemoteSave.localStorage?.fillFormFromStorage) {
         dolRemoteSave.localStorage.fillFormFromStorage();

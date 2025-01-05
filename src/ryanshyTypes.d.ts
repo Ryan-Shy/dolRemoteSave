@@ -11,6 +11,12 @@ type DolRemoteSave = {
         ryanshy_greyout?: string,
         ryanshy_toast?: string,
     },
+    settings?: {
+        menuButton?: {
+            setMenuButtonPosition?: (pos: InsertPosition) => void,
+            getMenuButtonPosition?: () => InsertPosition,
+        }
+    },
     AddSaveDiv?: () => void,
     OnIframeLoad?: () => void,
     SetToast?: (msg:string) => void,
@@ -31,7 +37,7 @@ type DolRemoteSave = {
         saveSettings?: (key: string, value: any) => void,
         getSettings?: (key: string) => any,
         fillFormFromStorage?: () => void,
-    }
+    },
     remoteStorage?: {
         remoteLogin?: (remoteStorageInfo: RemoteStorageInfo, success:()=>any = ()=>{}, failure:()=>any = ()=>{}) => Promise<void>,
         remoteSave?: (data:any, savename: string, remoteStorageInfo: RemoteStorageInfo, success:()=>any = ()=>{}, failure:()=>any = ()=>{}) => Promise<void>,
@@ -41,7 +47,7 @@ type DolRemoteSave = {
         remoteChangePWD?: (password: string, remoteStorageInfo: RemoteStorageInfo, success:()=>any = ()=>{}, failure:()=>any = ()=>{}) => Promise<void>,
         createRemoteName?: (clearName:string) => string,
         createClearName?: (clearName:string) => string,
-    }
+    },
     saveTable?: {
         clearTable?: () => void,
         addRow?: () => TableRow | null,
@@ -52,7 +58,7 @@ type DolRemoteSave = {
         addNewSaveButtonCallback?: (button: HTMLButtonElement) => void,
         loadTable?: () => void,
         onListLoad?: (list: SaveList) => void,
-    }
+    },
     buttons?: {
         OnMenuButtonClick?: () => void,
         OnCloseOverlay?: () => void,
@@ -61,7 +67,8 @@ type DolRemoteSave = {
         OnSettingsTabClicked?: () => void,
         OnLoginSubmit?: (event: SubmitEvent) => Promise<void>,
         OnChangePasswordSubmit?: (event: SubmitEvent) => Promise<void>,
-    }
+        OnMenuPositionUpdated?: (event: Event) => void,
+    },
 }
 
 type RemoteStorageInfo = {

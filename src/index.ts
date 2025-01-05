@@ -32,6 +32,7 @@ dolRemoteSave.init = function () {
     dolRemoteSave.loadJS("/ryanshy/ryanshyButtons.js");
     dolRemoteSave.loadJS("/ryanshy/ryanshyLocalStorage.js");
     dolRemoteSave.loadJS("/ryanshy/ryanshySaveTable.js");
+    dolRemoteSave.loadJS("/ryanshy/ryanshySettings.js");
     dolRemoteSave.loadJS("/ryanshy/ryanshyDolHelper.js");
     dolRemoteSave.loadJS("/ryanshy/dolRemoteSave.js");
 }
