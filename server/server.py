@@ -8,8 +8,17 @@ import json
 conn : sqlite3.Connection = sqlite3.connect('dol.db')
 app = Bottle()
 MAX_SAVE_COUNT = 100
+your_domain = "<change me>"
 
 def main():
+    createTables()
+    # run bottle
+    #run(app=app, host='0.0.0.0', port=8089, server='gunicorn', keyfile=f'/etc/letsencrypt/live/{your_domain}/privkey.pem', certfile=f'/etc/letsencrypt/live/{your_domain}/fullchain.pem', accesslog='-')
+    run(app=app, host='0.0.0.0', port=8088)
+    conn.commit()
+    conn.close()
+
+def createTables():
     sql_create_users = '''
     create table if not exists `users` (
       `id` integer not null primary key autoincrement,
@@ -33,11 +42,6 @@ def main():
     conn.execute(sql_create_users)
     conn.execute(sql_create_saves)
     conn.commit()
-    # run bottle
-    #run(app=app, host='0.0.0.0', port=8089, server='gunicorn', keyfile='/etc/letsencrypt/live/ryanshy.eu/privkey.pem', certfile='/etc/letsencrypt/live/ryanshy.eu/fullchain.pem', accesslog='-')
-    run(app=app, host='0.0.0.0', port=8088)
-    conn.commit()
-    conn.close()
 
 def getUserId(username: str) -> int:
     sql_select_user = "select id, username from users where username = ?"
