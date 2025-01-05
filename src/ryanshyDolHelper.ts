@@ -1,5 +1,8 @@
-function canSave() : boolean {
-    if (!createCW()) {
+var dolRemoteSave: DolRemoteSave = globalThis.dolRemoteSave ?? {};
+dolRemoteSave.dolHelper = dolRemoteSave.dolHelper ?? {};
+
+dolRemoteSave.dolHelper.canSave = function () : boolean {
+    if ((!dolRemoteSave.createCW || !dolRemoteSave.createCW())) {
         return false;
     }
     if (!globalThis.cw) {
@@ -13,8 +16,8 @@ function canSave() : boolean {
     return canSave;
 }
 
-function getSaveData() : string {
-    if (!createCW()) {
+dolRemoteSave.dolHelper.getSaveData = function () : string {
+    if ((!dolRemoteSave.createCW || !dolRemoteSave.createCW())) {
         return "";
     }
     if (!globalThis.cw) {
@@ -24,8 +27,8 @@ function getSaveData() : string {
     return cw.SugarCube?.Save.serialize() ?? "";
 }
 
-function loadSaveData(data: string) {
-    if (!createCW()) {
+dolRemoteSave.dolHelper.loadSaveData = function (data: string) {
+    if ((!dolRemoteSave.createCW || !dolRemoteSave.createCW())) {
         return "";
     }
     if (!globalThis.cw) {

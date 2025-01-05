@@ -1,7 +1,12 @@
+var dolRemoteSave: DolRemoteSave = globalThis.dolRemoteSave ?? {};
+dolRemoteSave.remoteStorage = dolRemoteSave.remoteStorage ?? {};
 /*
  * Remote Storage
  */
-async function remoteLogin(remoteStorageInfo: RemoteStorageInfo, success:()=>any = ()=>{}, failure:()=>any = ()=>{}) {
+dolRemoteSave.remoteStorage.remoteLogin = async function (remoteStorageInfo: RemoteStorageInfo, success:()=>any = ()=>{}, failure:()=>any = ()=>{}) {
+    if (!dolRemoteSave.SetToast || !dolRemoteSave.localStorage?.saveSettings) {
+        return;
+    }
     try {
         const response = await fetch(`${remoteStorageInfo.server}/dol/user/login`, {
             method: "GET",
@@ -14,22 +19,25 @@ async function remoteLogin(remoteStorageInfo: RemoteStorageInfo, success:()=>any
 
         if (response.ok) {
             const remoteStorageInfoSave: RemoteStorageInfo = {username:remoteStorageInfo.username, credentials: remoteStorageInfo.credentials, server: remoteStorageInfo.server};
-            saveSettings("remoteStorageInfo", remoteStorageInfoSave);
-            SetToast("<h2 class=\"green\">Login successful</h2>");
+            dolRemoteSave.localStorage.saveSettings("remoteStorageInfo", remoteStorageInfoSave);
+            dolRemoteSave.SetToast("<h2 class=\"green\">Login successful</h2>");
             success();
         } else {
             console.error("Login failed");
-            SetToast("<h2 class=\"red\">Login failed</h2>");
+            dolRemoteSave.SetToast("<h2 class=\"red\">Login failed</h2>");
             failure();
         }
     } catch (error) {
         console.error("Error during login:", error);
-        SetToast("<h2 class=\"red\">Error during login</h2>");
+        dolRemoteSave.SetToast("<h2 class=\"red\">Error during login</h2>");
         failure();
     }
 }
 
-async function remoteSave(data:any, savename: string, remoteStorageInfo: RemoteStorageInfo, success:()=>any = ()=>{}, failure:()=>any = ()=>{}) {
+dolRemoteSave.remoteStorage.remoteSave = async function (data:any, savename: string, remoteStorageInfo: RemoteStorageInfo, success:()=>any = ()=>{}, failure:()=>any = ()=>{}) {
+    if (!dolRemoteSave.SetToast) {
+        return;
+    }
     const requestBody = data;
 
     try {
@@ -44,21 +52,24 @@ async function remoteSave(data:any, savename: string, remoteStorageInfo: RemoteS
         });
 
         if (response.ok) {
-            SetToast("<h2 class=\"green\">Saving successful</h2>");
+            dolRemoteSave.SetToast("<h2 class=\"green\">Saving successful</h2>");
             success();
         } else {
             console.error("Saving failed");
-            SetToast("<h2 class=\"red\">Saving failed</h2>");
+            dolRemoteSave.SetToast("<h2 class=\"red\">Saving failed</h2>");
             failure();
         }
     } catch (error) {
         console.error("Error during saving:", error);
-        SetToast("<h2 class=\"red\">Error during saving</h2>");
+        dolRemoteSave.SetToast("<h2 class=\"red\">Error during saving</h2>");
         failure();
     }
 }
 
-async function remoteLoad(savename: string, remoteStorageInfo: RemoteStorageInfo, success:(data:any)=>any = ()=>{}, failure:()=>any = ()=>{}) {
+dolRemoteSave.remoteStorage.remoteLoad = async function (savename: string, remoteStorageInfo: RemoteStorageInfo, success:(data:any)=>any = ()=>{}, failure:()=>any = ()=>{}) {
+    if (!dolRemoteSave.SetToast) {
+        return;
+    }
     try {
         const response = await fetch(`${remoteStorageInfo.server}/dol/save/${savename}`, {
             method: "GET",
@@ -72,23 +83,26 @@ async function remoteLoad(savename: string, remoteStorageInfo: RemoteStorageInfo
         const data = await response.json();
 
         if (response.ok) {
-            SetToast("<h2 class=\"green\">Loading successful</h2>");
+            dolRemoteSave.SetToast("<h2 class=\"green\">Loading successful</h2>");
             success(data);
             return data;
         } else {
             console.error("Loading failed");
-            SetToast("<h2 class=\"red\">Loading failed</h2>");
+            dolRemoteSave.SetToast("<h2 class=\"red\">Loading failed</h2>");
             failure();
         }
     } catch (error) {
         console.error("Error during loading:", error);
-        SetToast("<h2 class=\"red\">Error during loading</h2>");
+        dolRemoteSave.SetToast("<h2 class=\"red\">Error during loading</h2>");
         failure();
     }
     return null;
 }
 
-async function remoteDelete(savename: string, remoteStorageInfo: RemoteStorageInfo, success:()=>any = ()=>{}, failure:()=>any = ()=>{}) {
+dolRemoteSave.remoteStorage.remoteDelete = async function (savename: string, remoteStorageInfo: RemoteStorageInfo, success:()=>any = ()=>{}, failure:()=>any = ()=>{}) {
+    if (!dolRemoteSave.SetToast) {
+        return;
+    }
     try {
         const response = await fetch(`${remoteStorageInfo.server}/dol/save/${savename}`, {
             method: "DELETE",
@@ -100,21 +114,24 @@ async function remoteDelete(savename: string, remoteStorageInfo: RemoteStorageIn
         });
 
         if (response.ok) {
-            SetToast("<h2 class=\"green\">Delete successful</h2>");
+            dolRemoteSave.SetToast("<h2 class=\"green\">Delete successful</h2>");
             success();
         } else {
             console.error("Delete failed");
-            SetToast("<h2 class=\"red\">Delete failed</h2>");
+            dolRemoteSave.SetToast("<h2 class=\"red\">Delete failed</h2>");
             failure();
         }
     } catch (error) {
         console.error("Error during delete:", error);
-        SetToast("<h2 class=\"red\">Error during delete</h2>");
+        dolRemoteSave.SetToast("<h2 class=\"red\">Error during delete</h2>");
         failure();
     }
 }
 
-async function remoteList(remoteStorageInfo: RemoteStorageInfo, success:(data:SaveList)=>any = ()=>{}, failure:()=>any = ()=>{}) {
+dolRemoteSave.remoteStorage.remoteList = async function (remoteStorageInfo: RemoteStorageInfo, success:(data:SaveList)=>any = ()=>{}, failure:()=>any = ()=>{}) {
+    if (!dolRemoteSave.SetToast) {
+        return;
+    }
     try {
         const response = await fetch(`${remoteStorageInfo.server}/dol/user/list`, {
             method: "GET",
@@ -132,18 +149,21 @@ async function remoteList(remoteStorageInfo: RemoteStorageInfo, success:(data:Sa
             return data;
         } else {
             console.error("Listing saves failed");
-            SetToast("<h2 class=\"red\">Listing saves failed</h2>");
+            dolRemoteSave.SetToast("<h2 class=\"red\">Listing saves failed</h2>");
             failure();
         }
     } catch (error) {
         console.error("Error during listing saves:", error);
-        SetToast("<h2 class=\"red\">Error during listing saves</h2>");
+        dolRemoteSave.SetToast("<h2 class=\"red\">Error during listing saves</h2>");
         failure();
     }
     return null;
 }
 
-async function remoteChangePWD(password: string, remoteStorageInfo: RemoteStorageInfo, success:()=>any = ()=>{}, failure:()=>any = ()=>{}) {
+dolRemoteSave.remoteStorage.remoteChangePWD = async function (password: string, remoteStorageInfo: RemoteStorageInfo, success:()=>any = ()=>{}, failure:()=>any = ()=>{}) {
+    if (!dolRemoteSave.SetToast || !dolRemoteSave.localStorage?.saveSettings) {
+        return;
+    }
     const requestBody = {password: password};
 
     try {
@@ -159,22 +179,22 @@ async function remoteChangePWD(password: string, remoteStorageInfo: RemoteStorag
 
         if (response.ok) {
             remoteStorageInfo.credentials = btoa(`${remoteStorageInfo.username}:${password}`);
-            saveSettings("remoteStorageInfo", remoteStorageInfo);
-            SetToast("<h2 class=\"green\">Password changed successful</h2>");
+            dolRemoteSave.localStorage.saveSettings("remoteStorageInfo", remoteStorageInfo);
+            dolRemoteSave.SetToast("<h2 class=\"green\">Password changed successful</h2>");
             success();
         } else {
             console.error("Password change failed");
-            SetToast("<h2 class=\"red\">Password change failed</h2>");
+            dolRemoteSave.SetToast("<h2 class=\"red\">Password change failed</h2>");
             failure();
         }
     } catch (error) {
         console.error("Error during change password:", error);
-        SetToast("<h2 class=\"red\">Error during change password</h2>");
+        dolRemoteSave.SetToast("<h2 class=\"red\">Error during change password</h2>");
         failure();
     }
 }
 
-function createRemoteName(clearName: string) : string {
+dolRemoteSave.remoteStorage.createRemoteName = function (clearName: string) : string {
     try {
         const remoteName = btoa(clearName);
         return remoteName;
@@ -184,7 +204,7 @@ function createRemoteName(clearName: string) : string {
     return "";
 }
 
-function createClearName(remoteName: string) : string {
+dolRemoteSave.remoteStorage.createClearName = function (remoteName: string) : string {
     try {
         const clearName = atob(remoteName);
         return clearName;

@@ -1,7 +1,10 @@
+var dolRemoteSave: DolRemoteSave = globalThis.dolRemoteSave ?? {};
+dolRemoteSave.localStorage = dolRemoteSave.localStorage ?? {};
+
 /*
  * Local Storage
  */
-function saveSettings(key: string, value: any) {
+dolRemoteSave.localStorage.saveSettings = function (key: string, value: any) {
     if (typeof key !== 'string' || !key.trim()) {
         console.error('Invalid key. It must be a non-empty string.');
         return;
@@ -15,7 +18,7 @@ function saveSettings(key: string, value: any) {
     }
 }
 
-function getSettings(key: string) : any {
+dolRemoteSave.localStorage.getSettings = function (key: string) : any {
     if (typeof key !== 'string' || !key.trim()) {
         console.error('Invalid key. It must be a non-empty string.');
         return null;
@@ -30,8 +33,11 @@ function getSettings(key: string) : any {
     }
 }
 
-function fillFormFromStorage() {
-    const remoteStorageInfo = getSettings("remoteStorageInfo") as RemoteStorageInfo;
+dolRemoteSave.localStorage.fillFormFromStorage = function () {
+    if (!dolRemoteSave.localStorage?.getSettings) {
+        return;
+    }
+    const remoteStorageInfo = dolRemoteSave.localStorage.getSettings("remoteStorageInfo") as RemoteStorageInfo;
     if (!remoteStorageInfo) {
         return;
     }

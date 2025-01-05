@@ -9,4 +9,5 @@ declare global {
         | undefined;
     var cOverlay : HTMLElement | undefined;
     var saveObserver : MutationObserver | undefined;
+    var dolRemoteSave : DolRemoteSave;
 }

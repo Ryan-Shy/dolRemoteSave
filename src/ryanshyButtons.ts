@@ -1,7 +1,9 @@
+var dolRemoteSave: DolRemoteSave = globalThis.dolRemoteSave ?? {};
+dolRemoteSave.buttons = dolRemoteSave.buttons ?? {};
 /*
  * Button click functions
  */
-function OnMenuButtonClick() {
+dolRemoteSave.buttons.OnMenuButtonClick = function () {
     const dolEmbedded = document.getElementById("dolEmbedded")
     if (!dolEmbedded) {
         return;
@@ -19,10 +21,12 @@ function OnMenuButtonClick() {
     }
     greyout.setAttribute("class", "ryanshy-greyout")
     // reset tab to saves
-    OnSavesTabClicked();
+    if (dolRemoteSave.buttons?.OnSavesTabClicked) {
+        dolRemoteSave.buttons.OnSavesTabClicked();
+    }
 }
 
-function OnCloseOverlay() {
+dolRemoteSave.buttons.OnCloseOverlay = function () {
     const dolEmbedded = document.getElementById("dolEmbedded")
     // re-enable iframe
     if (dolEmbedded) {
@@ -48,12 +52,14 @@ function OnCloseOverlay() {
     }
 
     // clear table
-    clearTable();
+    if (dolRemoteSave.saveTable?.clearTable) {
+        dolRemoteSave.saveTable.clearTable();
+    }
 }
 /*
  * Overlay tabs
  */
-function OnLoginTabClicked() {
+dolRemoteSave.buttons.OnLoginTabClicked = function () {
     // disable all panels
     const panels = document.getElementsByClassName("ryanshy-panel-enabled");
     for (const panel of panels) {
@@ -70,7 +76,7 @@ function OnLoginTabClicked() {
     loginTab?.setAttribute("current","");
 }
 
-function OnSavesTabClicked() {
+dolRemoteSave.buttons.OnSavesTabClicked = function () {
     // disable all panels
     const panels = document.getElementsByClassName("ryanshy-panel-enabled");
     for (const panel of panels) {
@@ -85,10 +91,12 @@ function OnSavesTabClicked() {
     savesPanel?.setAttribute("class", "ryanshy-panel-enabled");
     const savesTab = document.getElementById("ryanshy-overlay-tab-saves");
     savesTab?.setAttribute("current","");
-    loadTable();
+    if (dolRemoteSave.saveTable?.loadTable) {
+        dolRemoteSave.saveTable.loadTable();
+    }
 }
 
-function OnSettingsTabClicked() {
+dolRemoteSave.buttons.OnSettingsTabClicked = function () {
     // disable all panels
     const panels = document.getElementsByClassName("ryanshy-panel-enabled");
     for (const panel of panels) {
@@ -107,8 +115,12 @@ function OnSettingsTabClicked() {
 /*
  * Form submit overrides
  */
-async function OnLoginSubmit(event: SubmitEvent) {
+dolRemoteSave.buttons.OnLoginSubmit = async function (event: SubmitEvent) {
     event.preventDefault();
+
+    if (!dolRemoteSave.remoteStorage?.remoteLogin) {
+        return;
+    }
 
     const serverElement = document.getElementById('ryanshy-server');
     const usernameElement = document.getElementById('ryanshy-username');
@@ -123,17 +135,23 @@ async function OnLoginSubmit(event: SubmitEvent) {
     const credentials = btoa(`${username}:${password}`);
     const remoteStorageInfo: RemoteStorageInfo = {username, credentials, server};
 
-    remoteLogin(remoteStorageInfo);
+    dolRemoteSave.remoteStorage.remoteLogin(remoteStorageInfo);
 }
 
-async function OnChangePasswordSubmit(event: SubmitEvent) {
+dolRemoteSave.buttons.OnChangePasswordSubmit = async function (event: SubmitEvent) {
     event.preventDefault();
 
+    if (!dolRemoteSave.SetToast
+        || !dolRemoteSave.localStorage?.getSettings
+        || !dolRemoteSave.remoteStorage?.remoteChangePWD) {
+        return;
+    }
+
     // need to be logged in to use, check local storage
-    const remoteStorageInfo = getSettings("remoteStorageInfo") as RemoteStorageInfo;
+    const remoteStorageInfo = dolRemoteSave.localStorage.getSettings("remoteStorageInfo") as RemoteStorageInfo;
     if (!remoteStorageInfo) {
         console.error("Not logged in yet, cannot change password");
-        SetToast("<h2 class=\"red\">Please Login First</h2>");
+        dolRemoteSave.SetToast("<h2 class=\"red\">Please Login First</h2>");
         return;
     }
 
@@ -143,7 +161,7 @@ async function OnChangePasswordSubmit(event: SubmitEvent) {
     }
     const password = (passwordElement as HTMLInputElement).value;
 
-    await remoteChangePWD(password, remoteStorageInfo, ()=> {
+    await dolRemoteSave.remoteStorage.remoteChangePWD(password, remoteStorageInfo, ()=> {
         (passwordElement as HTMLInputElement).value = "";
     });
 }
