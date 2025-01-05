@@ -6,3 +6,4 @@
 /**/*.db
 /**/*.zip
 /dist
+/integrate

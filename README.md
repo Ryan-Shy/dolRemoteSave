@@ -30,6 +30,44 @@ To clean up the project for a clean build, run the following:
   npm run clean
   ```
 
+### Integrate
+
+Some integrate scripts have been set up. They are written for Windows and require 7z.exe to be on the `path`-environment variable.
+
+To make use of them, the following manual steps are required:
+
+- create the following folder structure:
+  <div style="line-height: 0">
+  <code>
+  dolRemoteSave<br>
+  │ &nbsp;&nbsp;README.md<br>
+  │ &nbsp;&nbsp;package.json<br>
+  │ &nbsp;&nbsp;etc...<br>
+  │ &nbsp;&nbsp;<br>
+  └── <span style="color:green"> integrate </span><br>
+  &nbsp;&nbsp;&nbsp;&nbsp;├── <span style="color:green"> android </span> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;<i>set up android integration</i> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;└── <span style="color:green"> html </span> <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>set up html integration</i>
+  </code>
+  </div>
+#### Android Integration
+
+> **TODO** Set up Android Integration
+
+#### HTML Integration
+- in the html folder, extract the game version that should be integrated
+- rename the folder from `Degrees of Lewdity` to `Degrees_of_Lewdity` (i.e. add underscores instead of spaces)
+- go into the folder and rename the `.html` file to `Degrees of Lewdity.html` (i.e. remove the version)
+- go back to the html folder and add the `Degrees_of_Lewdity` folder to a zip Archive named `Degrees_of_Lewdity.zip`
+
+HTML Integration is now set up. To start the integration use the following command:
+```
+npm run integrate:html
+```
+
+This command will extract the zip archive and copy the contents of the dist folder into the extracted game folder.
+
 ## Installation
 
 ### Install as the only extension of this type
@@ -180,7 +218,7 @@ Here is some extra documentation on the server:
 
 #### REST API
 
-**TODO** Document the Rest API
+> **TODO** Document the Rest API
 
 #### Security Concerns
 
