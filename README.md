@@ -85,7 +85,7 @@ To use this extension, follow these steps to add it to a clean DoL game. Clean i
 
 If the game already has an extension with this framework, installation of this extension becomes a little bit harder.
 
-- Copy the [ryanshy](/dist/ryanshy/) and [ryanshyStyle](/dist/ryanshyStyle/) folders to the DoL folder.
+- Copy the [dolRemoteSave](/dist/dolRemoteSave/) and [dolRemoteSaveStyle](/dist/dolRemoteSaveStyle/) folders to the DoL folder.
 
 - The [index.html](/dist/index.html), [index.css](/dist/index.css) and [package.json](/dist/package.json) files should already be in the modified game folder.
   - if not: copy the missing files as well, though it is more likely that the game does not have an extension of this framework.
@@ -94,7 +94,7 @@ If the game already has an extension with this framework, installation of this e
 - Edit the `index.html` file using any text editor
   - In the `<body>`-section of the html file, add the following line:
   ```html
-  <script src="/ryanshy/index.js" async defer></script>
+  <script src="/dolRemoteSave/index.js" async defer></script>
   ```
   - Save the file
 
@@ -195,7 +195,7 @@ This extension wraps the base game with an `iframe`-element. The framework aims 
 
 An extension should load all its content using a single script. This allows easy management of extensions and helps mitigating collisions. An example of what adding a script should look like is here:
 ```html
-<script src="/ryanshy/index.js" async defer></script>
+<script src="/dolRemoteSave/index.js" async defer></script>
 ```
 
 - **DOM-Elements**:<br>
