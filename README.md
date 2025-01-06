@@ -32,7 +32,18 @@ To clean up the project for a clean build, run the following:
 
 ### Integrate
 
-Some integrate scripts have been set up. They are written for Windows and require 7z.exe to be on the `path`-environment variable.
+Some integrate scripts have been set up. They are written for Windows and require additional tools
+
+For the HTML integration the following applications are also required:
+- 7z
+
+For the Android integration the following applications are also required:
+- apktool
+- keytool
+- zipalign
+- apksigner
+
+Make sure their executables are in the `path`-environment variable.
 
 To make use of them, the following manual steps are required:
 
@@ -52,8 +63,25 @@ To make use of them, the following manual steps are required:
   </code>
   </div>
 #### Android Integration
+> **NOTE** due to apktool being weird, locate the `apktool.bat` file and append the following at the end:
+  >```
+  >exit
+  >```
 
-> **TODO** Set up Android Integration
+- in the android folder, copy the apk of the game version that should be integrated
+- rename the apk to `Degrees_of_Lewdity.apk`
+- create a keystore for signing the apk
+  - use the existing npm script:
+  ```
+  npm run integrate:android:keytool
+  ```
+  - set the password to `dolRemoteSave`
+  - fill in the required details
+
+Android Integration is now set up. To start the integration use the following command:
+```
+npm run integrate:android
+```
 
 #### HTML Integration
 - in the html folder, extract the game version that should be integrated
