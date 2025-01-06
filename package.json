@@ -6,7 +6,7 @@
     "scripts": {
         "build": "tsc --project tsconfig.json",
         "build:start": "npm run clean && npm run build && npm run dist && npm run integrate:html && npm run start",
-        "build:all": "npm run build:android && npm run integrate:html && npm run dist:integrate:android && npm run dist:integrate:html && dist:integrate:zip",
+        "build:all": "npm run build:android && npm run integrate:html && npm run dist:integrate:all",
         "build:android": "npm run clean && npm run build && npm run dist && npm run integrate:android",
         "build:html": "npm run clean && npm run build && npm run dist && npm run integrate:html",
         "clean": "npm run clean:dist && npm run clean:js && npm run clean:integrate",
@@ -21,6 +21,7 @@
         "dist:css1": "copyfiles dolRemoteSaveStyle/**/* dist",
         "dist:css2": "copyfiles *.css dist/",
         "dist:package": "copyfiles package.json dist/",
+        "dist:integrate:all": "npm run dist:integrate:zip && npm run dist:integrate:android && npm run dist:integrate:html",
         "dist:integrate:android": "copyfiles -u 4 integrate/android/Degrees_of_Lewdity/dist/Degrees_of_Lewdity_aligned.apk dist/ && node -e \"require('fs').rename('./dist/Degrees_of_Lewdity_aligned.apk', './dist/Degrees_of_Lewdity.apk', () => {})\"",
         "dist:integrate:html": "copyfiles -u 2 integrate/html/Degrees_of_Lewdity/**/* dist/ && cd ./dist && start /WAIT /B 7z a -y Degrees_of_Lewdity.zip .\\Degrees_of_Lewdity\\",
         "dist:integrate:zip": "cd ./dist && start /WAIT /B 7z a -y dolRemoteSave.zip dolRemoteSave dolRemoteSaveStyle index.html index.css package.json",
