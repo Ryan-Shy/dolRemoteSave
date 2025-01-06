@@ -21,20 +21,20 @@ dolRemoteSave.init = function () {
     }
     // Load CSS
     console.log("dolRemoteSave: init CSS");
-    dolRemoteSave.loadCSS("/ryanshyStyle/dol-styles.css");
-    dolRemoteSave.loadCSS("/ryanshyStyle/index.css");
+    dolRemoteSave.loadCSS("/dolRemoteSaveStyle/dol-styles.css");
+    dolRemoteSave.loadCSS("/dolRemoteSaveStyle/index.css");
     // Load HTML
     console.log("dolRemoteSave: init HTML");
-    dolRemoteSave.loadJS("/ryanshy/ryanshyHTML.js");
+    dolRemoteSave.loadJS("/dolRemoteSave/ryanshyHTML.js");
     // Load JS
     console.log("dolRemoteSave: init JS");
-    dolRemoteSave.loadJS("/ryanshy/ryanshyRemoteStorage.js");
-    dolRemoteSave.loadJS("/ryanshy/ryanshyButtons.js");
-    dolRemoteSave.loadJS("/ryanshy/ryanshyLocalStorage.js");
-    dolRemoteSave.loadJS("/ryanshy/ryanshySaveTable.js");
-    dolRemoteSave.loadJS("/ryanshy/ryanshySettings.js");
-    dolRemoteSave.loadJS("/ryanshy/ryanshyDolHelper.js");
-    dolRemoteSave.loadJS("/ryanshy/dolRemoteSave.js");
+    dolRemoteSave.loadJS("/dolRemoteSave/ryanshyRemoteStorage.js");
+    dolRemoteSave.loadJS("/dolRemoteSave/ryanshyButtons.js");
+    dolRemoteSave.loadJS("/dolRemoteSave/ryanshyLocalStorage.js");
+    dolRemoteSave.loadJS("/dolRemoteSave/ryanshySaveTable.js");
+    dolRemoteSave.loadJS("/dolRemoteSave/ryanshySettings.js");
+    dolRemoteSave.loadJS("/dolRemoteSave/ryanshyDolHelper.js");
+    dolRemoteSave.loadJS("/dolRemoteSave/dolRemoteSave.js");
 }
 
 dolRemoteSave.init();
