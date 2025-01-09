@@ -13,7 +13,7 @@ dolRemoteSave.html.ryanshy_save_overlay = `
         <div class="ryanshy-panels">
             <div id="ryanshy-login-panel" class="ryanshy-panel-disabled">
                 <div class="ryanshy-custom-overlay" style="visibility: hidden; position: absolute; overflow: hidden;">
-                    todo: in this tab, the user will enter their username and password, content should be saved on device!
+                    in this tab, the user will enter their username and password, content should be saved on device!
                 </div>
                 <div class="ryanshy-custom-overlay">
                     <div class="ryanshy-login-element">
@@ -35,7 +35,7 @@ dolRemoteSave.html.ryanshy_save_overlay = `
             </div>
             <div id="ryanshy-saves-panel" class="ryanshy-panel-enabled">
                 <div class="ryanshy-custom-overlay" style="visibility: hidden; position: absolute; overflow: hidden;">
-                    todo: this tab will list all remote saves and offer load, overwrite, delete and new save functionality
+                    this tab will list all remote saves and offer load, overwrite, delete and new save functionality
                 </div>
                 <div id="ryanshy-saves-element-head" class="ryanshy-custom-overlay">
                     <h2>Saves</h2>
@@ -60,7 +60,7 @@ dolRemoteSave.html.ryanshy_save_overlay = `
             </div>
             <div id="ryanshy-settings-panel" class="ryanshy-panel-disabled">
                 <div class="ryanshy-custom-overlay" style="visibility: hidden; position: absolute; overflow: hidden;">
-                    todo: this tab needs to have the change password function and in the future will hold autosave settings
+                    this tab needs to have the change password function and in the future will hold autosave settings
                 </div>
                 <div class="ryanshy-custom-overlay">
                     <div class="ryanshy-settings-element">

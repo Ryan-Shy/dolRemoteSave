@@ -169,6 +169,7 @@ dolRemoteSave.RemoveSaveOverlayListener = function() {
             if (dolRemoteSave.AddSaveOverlayListener) {
                 dolRemoteSave.AddSaveOverlayListener();
             }
+            return;
         } else {
             // still up to date, nothing to do
             return;

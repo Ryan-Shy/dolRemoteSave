@@ -178,7 +178,7 @@ dolRemoteSave.saveTable.addDeleteButtonCallback = function (button: HTMLButtonEl
         dolRemoteSave.SetToast("<h2 class=\"red\">Couldn't create save</h2>");
         return;
     }
-    // TODO add cb for deleting remote save
+    // add cb for deleting remote save
     button.onclick = () => {
         if (!dolRemoteSave.SetToast
             || !dolRemoteSave.localStorage?.getSettings
